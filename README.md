@@ -11,6 +11,9 @@
 
 Data comes in many shapes and sizes. Storing all data types as strings would be very inefficient in trytes. That is where this module comes in. Whether it be strings, numbers, boolean, arrays, etc. This module aims to convert the data to trytes and also bring it back to it's original format.
 
+## Todo
+[] encode/decode dates
+
 ---
 
 ## ISC License (ISC)

@@ -6,8 +6,8 @@ const TRYTE_TO_DEFAULT = { '9': '0', 'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E'
 type DataTypes = 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool';
 
 export function stringToTrytes(input: string): string {
-  if (typeof input !== 'string')
-    return null;
+  if (typeof input !== 'string') // soft failure
+    return '';
 
   let trytes = '';
 
@@ -29,8 +29,8 @@ export function stringToTrytes(input: string): string {
 }
 
 export function trytesToString(inputTrytes: string): string {
-  if (typeof inputTrytes !== 'string' || inputTrytes.length % 2)
-    return null;
+  if (typeof inputTrytes !== 'string' || inputTrytes.length % 2) // soft failure
+    return '';
 
   let outputString = '';
 
@@ -50,7 +50,30 @@ export function trytesToString(inputTrytes: string): string {
   return outputString;
 }
 
-export function int8ToTrytes(int: number): string {
+export function dateToTrytes(date: Date): String {
+  if (typeof date !== 'object' || typeof date.getMonth !== 'function')
+    return '9999999';
+  // Convert date to UTC (seconds) and convert with uInt32ToTrytes
+  let utcSeconds = Math.round(date.getTime() / 1000); // convert from milliseconds to seconds to fit in a 32 bit uint
+  if (utcSeconds < 0) // soft failure
+    uctSeconds = 0;
+
+  return uInt32ToTrytes(utcSeconds);
+}
+
+export function trytesToDate(trytes: string): Date {
+  if (typeof trytes !== 'string') // soft failure
+    return new Date(0);
+  let utcSeconds = trytesToUInt(trytes);
+  let date       = new Date(0);
+  date.setUTCSeconds(utcSeconds);
+
+  return date;
+}
+
+export function int8ToTrytes(int: number | null): string {
+  if (typeof int !== 'number') // soft failure
+    int = 0;
   // -128 to 127 (256 total) - 2 Trytes
   // Convert to a non-negative number, convert base, change each value to trytes
   int = int + 128;
@@ -68,6 +91,8 @@ export function trytesToInt8(trytes: string): number {
 }
 
 export function uInt8ToTrytes(uint: number): string {
+  if (typeof uint !== 'number') // soft failure
+    uint = 0;
   // 0 to 255 (256 total) - 2 Trytes
   // Convert base, change each value to trytes
   let trytes = uint.toString(27).split('').map(d => { return TRYTE_ALPHABET[ parseInt(d, 27) ] });
@@ -77,6 +102,8 @@ export function uInt8ToTrytes(uint: number): string {
 }
 
 export function int16ToTrytes(int: number): string {
+  if (typeof int !== 'number') // soft failure
+    int = 0;
   // -32,768 to 32,767 (65,536 total) - 4 Trytes
   // Convert to a non-negative number, convert base, change each value to trytes
   int = int + 32768;
@@ -94,6 +121,8 @@ export function trytesToInt16(trytes: string): number {
 }
 
 export function uInt16ToTrytes(uint: number): string {
+  if (typeof uint !== 'number') // soft failure
+    uint = 0;
   // 0 to 65,535 (65,536 total) - 4 Trytes
   // Convert base, change each value to trytes
   let trytes = uint.toString(27).split('').map(d => { return TRYTE_ALPHABET[ parseInt(d, 27) ] });
@@ -103,6 +132,8 @@ export function uInt16ToTrytes(uint: number): string {
 }
 
 export function int32ToTrytes(int: number): string {
+  if (typeof int !== 'number') // soft failure
+    int = 0;
   // -2,147,483,648 to 2,147,483,647 (4,294,967,296 total) - 7 Trytes
   // Convert to a non-negative number, convert base, change each value to trytes
   int = int + 2147483648;
@@ -113,6 +144,8 @@ export function int32ToTrytes(int: number): string {
 }
 
 export function trytesToInt32(trytes: string): number {
+  if (typeof trytes !== 'string') // soft failure
+    return 0;
   // Convert each tryte to default base array and then parseInt
   let int = trytes.split('').map(t => { return TRYTE_TO_DEFAULT[t] }).join('');
 
@@ -120,6 +153,8 @@ export function trytesToInt32(trytes: string): number {
 }
 
 export function uInt32ToTrytes(uint: number): string {
+  if (typeof uint !== 'number') // soft failure
+    uint = 0;
   // 0 to 4,294,967,295 (4,294,967,296 total) - 7 Trytes
   // Convert base, change each value to trytes
   let trytes = uint.toString(27).split('').map(d => { return TRYTE_ALPHABET[ parseInt(d, 27) ] });
@@ -129,6 +164,8 @@ export function uInt32ToTrytes(uint: number): string {
 }
 
 export function trytesToUInt(trytes: string): number {
+  if (typeof trytes !== 'string') // soft failure
+    return 0;
   // Convert each tryte to default base array and then parseInt
   let uint = trytes.split('').map(t => { return TRYTE_TO_DEFAULT[t] }).join('');
 
@@ -136,6 +173,8 @@ export function trytesToUInt(trytes: string): number {
 }
 
 export function booleanToTryte(bool: bool): string {
+  if (typeof bool !== 'boolean') // soft failure
+    return '9'
   if (bool)
     return 'A';
   else
@@ -143,6 +182,8 @@ export function booleanToTryte(bool: bool): string {
 }
 
 export function tryteToBoolean(tryte: string): bool {
+  if (typeof tryte !== 'string') // soft failure
+    return false;
   if (tryte === 'A')
     return true;
   else
@@ -152,7 +193,8 @@ export function tryteToBoolean(tryte: string): bool {
 function _getEncoder(type: DataTypes): function {
   if (type === 'string') {
     return (input: string): string => {
-      return uInt16ToTrytes(input.length * 2) + stringToTrytes(input);
+      let trytes = stringToTrytes(input); // first convert incase it is not a string
+      return uInt16ToTrytes(trytes.length) + trytes;
     }
   } else if (type === 'int8') {
     return int8ToTrytes;
@@ -168,15 +210,21 @@ function _getEncoder(type: DataTypes): function {
     return uInt32ToTrytes;
   } else if (type === 'bool') {
     return booleanToTryte;
+  } else if (type === 'date') {
+    return dateToTrytes;
+  } else {
+    return null;
   }
 }
 
-function _getDecoder(type: DataTypes): function {
+function _getDecoder(type: DataTypes): [function, function] | [number, function] {
   if (type === 'string') {
-    return (trytes: string): string => {
-      let length = trytesToUInt(); // 4
-      return [length, trytes];
-    }
+    return [
+      (trytes: string, startingIndex: number): string => {
+        return trytesToUInt(trytes.slice(startingIndex, startingIndex + 4))
+      },
+      trytesToString
+    ];
   } else if (type === 'int8') {
     return [2, trytesToInt8];
   } else if (type === 'uint8') {
@@ -191,26 +239,56 @@ function _getDecoder(type: DataTypes): function {
     return [7, trytesToUInt];
   } else if (type === 'bool') {
     return [1, tryteToBoolean];
+  } else if (type === 'date') {
+    return [7, trytesToDate];
+  } else {
+    return [null, null];
   }
 }
 
 export function arrayToTrytes(array: Array<any>, type: DataTypes): string {
-  // First get the proper function from the type, IF type is 'string' then also save the length of the string
-  let conversion = _getEncoder(type);
+  // if (typeof type !== DataTypes) // soft failure
+  //   return '';
+  // First get the proper function from the type, If type is 'string' then also save the length of the string
+  let encode = _getEncoder(type);
   // Now break the array down to trytes
   let trytes = uInt8ToTrytes(array.length); // Thus the max array size is 255
-  array.forEach(value => { trytes += conversion(value) });
+  array.forEach(value => { trytes += encode(value) });
 
   return trytes;
 }
 
 export function trytesToArray(trytes: string, type: DataTypes): Array<any> {
+  // if (typeof type !== DataTypes) // soft failure
+  //   return [];
+  // First get the proper function from the type, If type is 'string' then the decoder works differently (edge case)
+  let [stepSize, decode] = _getDecoder(type);
+  let array = [];
+  let arraySize = trytesToUInt(trytes.slice(0, 2));
 
+  if (type === 'string') {
+    let startingIndex = 2;
+    while (arraySize--) {
+      // get size of string
+      let stringSize = stepSize(trytes, startingIndex);
+      startingIndex += 4; // increment index from size
+      array.push(decode(trytes.slice(startingIndex, startingIndex + stringSize)))
+      startingIndex += stringSize;
+      console.log();
+    }
+  } else {
+    for (let i = 2; i < trytes.length; i += stepSize)
+      array.push(decode(trytes.slice(i, i + stepSize)));
+  }
+
+  return array;
 }
 
 export default {
   stringToTrytes,
   trytesToString,
+  dateToTrytes,
+  trytesToDate,
   int8ToTrytes,
   trytesToInt8,
   uInt8ToTrytes,
