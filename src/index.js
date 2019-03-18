@@ -3,7 +3,7 @@
 const TRYTE_ALPHABET   = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const TRYTE_TO_DEFAULT = { '9': '0', 'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5', 'F': '6', 'G': '7', 'H': '8', 'I': '9', 'J': 'a', 'K': 'b', 'L': 'c', 'M': 'd', 'N': 'e', 'O': 'f', 'P': 'g', 'Q': 'h', 'R': 'i', 'S': 'j', 'T': 'k', 'U': 'l', 'V': 'm', 'W': 'n', 'X': 'o', 'Y': 'p', 'Z': 'q' };
 
-export type DataTypes = 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool';
+export type DataTypes = 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date';
 
 export function stringToTrytes(input: string): string {
   if (typeof input !== 'string') // soft failure
