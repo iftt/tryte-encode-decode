@@ -1,25 +1,25 @@
 {
-  "name": "@polkajs/skeleton-module",
-  "version": "1.0.4",
-  "description": "When creating new NodeJS modules, use this skeletal structure",
+  "name": "@iftt/tryte-encode-decode",
+  "version": "1.0.0",
+  "description": "Trytes are the encoded data type used by IOTA. This module encodes and decodes trytes.",
   "main": "lib/index.js",
   "scripts": {
     "lint+build+test": "yarn run lint && yarn run build && yarn run test",
     "lint": "echo linting... && eslint ./src/**/*.js && echo 'successfully linted'",
     "build": "echo building... && babel src/ -d lib/ && echo 'successfully built'",
-    "prepublish": "yarn run build",
+    "prepublish": "yarn run lint+build+test",
     "test": "echo running server tests... && tape test/**/*.js | tap-summary && echo 'successfully completed tests'"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iftt/skeleton-module.git"
+    "url": "https://github.com/iftt/tryte-encode-decode.git"
   },
   "author": "Craig OConnor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IFTT/skeleton-module/issues"
+    "url": "https://github.com/IFTT/tryte-encode-decode/issues"
   },
-  "homepage": "https://github.com/IFTT/skeleton-module#readme",
+  "homepage": "https://github.com/IFTT/tryte-encode-decode#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
