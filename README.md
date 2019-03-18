@@ -12,18 +12,18 @@
 Data comes in many shapes and sizes. Storing all data types as strings would be very inefficient in trytes. That is where this module comes in. Whether it be strings, numbers, boolean, arrays, dates, etc. This module aims to encode the data to trytes and also bring it back to it's original type and value.
 
 ## Supported Encodings
-[x] String
-[x] 8-bit Integer
-[x] 16-bit Integer
-[x] 32-bit Integer
-[ ] 64-bit Integer
-[x] 8-bit Unsigned Integer
-[x] 16-bit Unsigned Integer
-[x] 32-bit Unsigned Integer
-[ ] 64-bit Unsigned Integer
-[x] Boolean
-[x] Date
-[x] Arrays
+- [x] String
+- [x] 8-bit Integer
+- [x] 16-bit Integer
+- [x] 32-bit Integer
+- [ ] 64-bit Integer
+- [x] 8-bit Unsigned Integer
+- [x] 16-bit Unsigned Integer
+- [x] 32-bit Unsigned Integer
+- [ ] 64-bit Unsigned Integer
+- [x] Boolean
+- [x] Date
+- [x] Arrays
 
 ## Further Reading
 [Understanding IOTA Trits & Trytes](https://steemit.com/iota/@wiredcrypto/understanding-iota-trits-and-trytes)
