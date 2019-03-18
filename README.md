@@ -9,10 +9,71 @@
 
 ## About
 
-Data comes in many shapes and sizes. Storing all data types as strings would be very inefficient in trytes. That is where this module comes in. Whether it be strings, numbers, boolean, arrays, etc. This module aims to convert the data to trytes and also bring it back to it's original format.
+Data comes in many shapes and sizes. Storing all data types as strings would be very inefficient in trytes. That is where this module comes in. Whether it be strings, numbers, boolean, arrays, dates, etc. This module aims to encode the data to trytes and also bring it back to it's original type and value.
 
-## Todo
-[] encode/decode dates
+## Further Reading
+[Understanding IOTA Trits & Trytes](https://steemit.com/iota/@wiredcrypto/understanding-iota-trits-and-trytes)
+
+## Install
+```sh
+# npm
+npm install --save tryte-encode-decode
+
+# yarn
+yarn add tryte-encode-decode
+```
+
+## Example
+```js
+// import package
+// ES5
+const tryteConverter = require('@iftt/tryte-encode-decode');
+// ES6
+import tryteConverter from '@iftt/tryte-encode-decode';
+
+let trytes = tryteConverter.stringToTrytes('This is a test.');
+let decodedTrytes = tryteConverter.trytesToString(trytes);
+
+// decodedTrytes === 'This is a test.'
+```
+
+## API
+
+### stringToTrytes(str?: string): string
+
+### trytesToString(str?: string): string
+
+### dateToTrytes(date?: Date): string
+
+### trytesToDate(str?: string): Date
+
+### int8ToTrytes(num?: number): string
+
+### trytesToInt8(str?: string): number
+
+### uInt8ToTrytes(num?: number): string
+
+### int16ToTrytes(num?: number): string
+
+### trytesToInt16(str?: string): number
+
+### uInt16ToTrytes(num?: number): string
+
+### int32ToTrytes(num?: number): string
+
+### trytesToInt32(str?: string): number
+
+### uInt32ToTrytes(num?: number): string
+
+### trytesToUInt(str?: string): number
+
+### booleanToTryte(bool?: boolean): string
+
+### tryteToBoolean(str?: string): boolean
+
+### arrayToTrytes(arr?: array<any>): string
+
+### trytesToArray(str?: string): array<any>
 
 ---
 

@@ -269,7 +269,7 @@ test('test encoding and decoding a boolean value', function (t) {
 });
 
 test('test encoding and decoding an array of 8 bit integers', function (t) {
-  t.plan(6);
+  t.plan(9);
 
   // Standard number array
   let array = [-128, 0, 1, 2, 127];
@@ -288,6 +288,15 @@ test('test encoding and decoding an array of 8 bit integers', function (t) {
   t.equal(trytes, '99');
   t.equal(trytes.length, 2);
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes));
+
+  // Not an array
+  array = null;
+  trytes = tryteConverter.arrayToTrytes(array, 'int8');
+  decodedTrytes = tryteConverter.trytesToArray(trytes, 'int8');
+
+  t.equal(trytes, '99');
+  t.equal(trytes.length, 2);
+  t.equal(JSON.stringify([]), JSON.stringify(decodedTrytes));
 });
 
 test('test encoding and decoding an array of 16 bit integers', function (t) {
@@ -392,7 +401,7 @@ test('test encoding and decoding an array of boolean values', function (t) {
 });
 
 test('test encoding and decoding an array of strings', function (t) {
-  t.plan(8);
+  t.plan(9);
 
   // Standard string array
   let array = ['a', 'b', 'c', 'd', 'e'];
@@ -415,6 +424,7 @@ test('test encoding and decoding an array of strings', function (t) {
   trytes = tryteConverter.arrayToTrytes(array, 'string');
   decodedTrytes = tryteConverter.trytesToArray(trytes, 'string');
 
+  t.equal(trytes, '9B99AUCCWCXCGDEAXCGDEAPCEAQCXCVCVCTCFDEAGDHDFDXCBDVCFA99BDCCWCXCGDEAXCGDEAPCBDCDHDWCTCFDEAQCXCVCEAGDHDFDXCBDVCSASASA');
   t.equal(trytes.length, 116);
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes));
 });
