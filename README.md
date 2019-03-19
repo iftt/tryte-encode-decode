@@ -55,7 +55,7 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 
 ## API
 
-- [stringToTrytes(str?: string): string [2 trytes per character]](#stringToTrytes)
+- [stringToTrytes](###stringToTrytes(str?: string): string [2 trytes per character])
 - [trytesToString(str?: string): string](#trytesToString)
 - [dateToTrytes(date?: Date): string [7 trytes]](#dateToTrytes)
 - [trytesToDate](#trytesToDate)
