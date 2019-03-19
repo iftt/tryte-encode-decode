@@ -55,9 +55,9 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 
 ## API
 
-- [stringToTrytes](###stringToTrytes(str?: string): string [2 trytes per character])
-- [trytesToString(str?: string): string](#trytesToString)
-- [dateToTrytes(date?: Date): string [7 trytes]](#dateToTrytes)
+- [stringToTrytes](#stringToTrytes)
+- [trytesToString](#trytesToString)
+- [dateToTrytes](#dateToTrytes)
 - [trytesToDate](#trytesToDate)
 - [int8ToTrytes](#int8ToTrytes)
 - [trytesToInt8](#trytesToInt8)
@@ -75,7 +75,8 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 - [arrayToTrytes](#arrayToTrytes)
 - [trytesToArray](#trytesToArray)
 
-### stringToTrytes(str?: string): string [2 trytes per character]
+### stringToTrytes
+`stringToTrytes(str?: string): string` [2 trytes per character]
 * encode string to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
