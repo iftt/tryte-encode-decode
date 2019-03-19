@@ -22,8 +22,8 @@ Data comes in many shapes and sizes. Storing all data types as strings would be 
 - [x] 32-bit Unsigned Integer
 - [ ] 64-bit Unsigned Integer
 - [x] Boolean
-- [x] Date
-- [x] Arrays
+- [x] DateUTC
+- [x] Array<supported>
 
 ## Further Reading
 [Understanding IOTA Trits & Trytes](https://steemit.com/iota/@wiredcrypto/understanding-iota-trits-and-trytes)
@@ -51,19 +51,77 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 // decodedTrytes === 'This is a test.'
 ```
 
+---
+
 ## API
 
 ### stringToTrytes(str?: string): string
+* encode string to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.stringToTrytes('This is a test.');
+
+// trytes === 'CCWCXCGDEAXCGDEAPCEAHDTCGDHDSA'
+```
 
 ### trytesToString(str?: string): string
+* decode trytes back to a string
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.stringToTrytes('This is a test.');
+let decodedTrytes = tryteConverter.trytesToString(trytes);
+
+// decodedTrytes === 'This is a test.'
+```
 
 ### dateToTrytes(date?: Date): string
+* encode a date to a string
+* NOTICE: This uses UTC encoding, so any date below January 1st, 1970 will resolve to the aforementioned date.
+* encoded dates are accurate to seconds (not milliseconds)
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let date = new Date('2019-03-18T04:39:00.000Z');
+let trytes = tryteConverter.dateToTrytes(date);
+
+// trytes === 'D9F9RH9'
+```
 
 ### trytesToDate(str?: string): Date
+* decode trytes back to a date
+* NOTICE: This uses UTC encoding, so any date below January 1st, 1970 will resolve to the aforementioned date.
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let date = new Date('2019-03-18T04:39:00.000Z');
+let trytes = tryteConverter.dateToTrytes(date);
+let decodedTrytes = tryteConverter.trytesToDate(trytes);
+
+// decodedTrytes === '2019-03-18T04:39:00.000Z'
+```
 
 ### int8ToTrytes(num?: number): string
+* encode 8-bit sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.int8ToTrytes(127);
+
+// trytes === 'IL'
+```
 
 ### trytesToInt8(str?: string): number
+* encode 8-bit sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.int8ToTrytes(127);
+let decodedTrytes = tryteConverter.trytesToInt8(trytes);
+
+// decodedTrytes === 127
+```
 
 ### uInt8ToTrytes(num?: number): string
 
