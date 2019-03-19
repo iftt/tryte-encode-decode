@@ -71,7 +71,7 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 - [trytesToUInt](#trytesToUInt)
 - [booleanToTryte](#booleanToTryte)
 - [tryteToBoolean](#tryteToBoolean)
-- [type DataTypes](#type DataTypes)
+- [type DataTypes](#type-DataTypes)
 - [arrayToTrytes](#arrayToTrytes)
 - [trytesToArray](#trytesToArray)
 
@@ -88,7 +88,8 @@ let trytes = tryteConverter.stringToTrytes('This is a test.');
 
 ---
 
-### trytesToString(str?: string): string
+### trytesToString
+`trytesToString(str?: string): string`
 * decode trytes back to a string
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -101,7 +102,8 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 
 ---
 
-### dateToTrytes(date?: Date): string [7 trytes]
+### dateToTrytes
+`dateToTrytes(date?: Date): string` [7 trytes]
 * encode a date to a string
 * NOTICE: This uses UTC encoding, so any date below January 1st, 1970 will resolve to the aforementioned date.
 * encoded dates are accurate to seconds (not milliseconds)
@@ -116,7 +118,8 @@ let trytes = tryteConverter.dateToTrytes(date);
 
 ---
 
-### trytesToDate(str?: string): Date
+### trytesToDate
+`trytesToDate(str?: string): Date`
 * decode trytes back to a date
 * NOTICE: This uses UTC encoding, so any date below January 1st, 1970 will resolve to the aforementioned date.
 ```js
@@ -131,7 +134,8 @@ let decodedTrytes = tryteConverter.trytesToDate(trytes);
 
 ---
 
-### int8ToTrytes(num?: number): string  [2 trytes]
+### int8ToTrytes
+`int8ToTrytes(num?: number): string` [2 trytes]
 * encode 8-bit sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -143,7 +147,8 @@ let trytes = tryteConverter.int8ToTrytes(127);
 
 ---
 
-### trytesToInt8(str?: string): number
+### trytesToInt8
+`trytesToInt8(str?: string): number`
 * decode trytes to 8-bit sized numbers
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -156,7 +161,8 @@ let decodedTrytes = tryteConverter.trytesToInt8(trytes);
 
 ---
 
-### uInt8ToTrytes(num?: number): string [2 trytes]
+### uInt8ToTrytes
+`uInt8ToTrytes(num?: number): string` [2 trytes]
 * encode 8-bit unsigned sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -168,7 +174,8 @@ let trytes = tryteConverter.uInt8ToTrytes(255);
 
 ---
 
-### int16ToTrytes(num?: number): string [4 trytes]
+### int16ToTrytes
+`int16ToTrytes(num?: number): string` [4 trytes]
 * encode 16-bit sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -180,7 +187,8 @@ let trytes = tryteConverter.int16ToTrytes(32767);
 
 ---
 
-### trytesToInt16(str?: string): number
+### trytesToInt16
+`trytesToInt16(str?: string): number`
 * decode trytes to 16-bit sized numbers
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -193,7 +201,8 @@ let decodedTrytes = tryteConverter.trytesToInt16(trytes);
 
 ---
 
-### uInt16ToTrytes(num?: number): string [4 trytes]
+### uInt16ToTrytes
+`uInt16ToTrytes(num?: number): string` [4 trytes]
 * encode 16-bit unsigned sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -205,7 +214,8 @@ let trytes = tryteConverter.uInt16ToTrytes(65535);
 
 ---
 
-### int32ToTrytes(num?: number): string [7 trytes]
+### int32ToTrytes
+`int32ToTrytes(num?: number): string` [7 trytes]
 * encode 32-bit sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -217,7 +227,8 @@ let trytes = tryteConverter.int32ToTrytes(2147483647);
 
 ---
 
-### trytesToInt32(str?: string): number
+### trytesToInt32
+`trytesToInt32(str?: string): number`
 * decode trytes to 32-bit sized numbers
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -230,7 +241,8 @@ let decodedTrytes = tryteConverter.trytesToInt32(trytes);
 
 ---
 
-### uInt32ToTrytes(num?: number): string [7 trytes]
+### uInt32ToTrytes
+`uInt32ToTrytes(num?: number): string` [7 trytes]
 * encode 32-bit unsigned sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -242,7 +254,8 @@ let trytes = tryteConverter.uInt32ToTrytes(4294967295);
 
 ---
 
-### trytesToUInt(str?: string): number
+### trytesToUInt
+`trytesToUInt(str?: string): number`
 * decode trytes to any sized unsigned number
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -255,7 +268,8 @@ let decodedTrytes = tryteConverter.trytesToUInt(trytes);
 
 ---
 
-### booleanToTryte(bool?: boolean): string [1 trytes]
+### booleanToTryte
+`booleanToTryte(bool?: boolean): string` [1 tryte]
 * encode a boolean value to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -267,7 +281,8 @@ let trytes = tryteConverter.booleanToTryte(false);
 
 ---
 
-### tryteToBoolean(str?: string): boolean
+### tryteToBoolean
+`tryteToBoolean(str?: string): boolean`
 * decode a tryte to a boolean value
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -280,12 +295,14 @@ let decodedTrytes = tryteConverter.tryteToBoolean(trytes);
 
 ---
 
-### type DataTypes (enumerable string)
-  * 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date'
+### type DataTypes
+`enumerable string`
+* 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date'
 
 ---
 
-### arrayToTrytes(arr?: array<any>, type: DataTypes): string [2 trytes arraySize + arraySize * type encoding size]
+### arrayToTrytes
+`arrayToTrytes(arr?: array<any>, type: DataTypes): string` [2 trytes arraySize + arraySize * type encoding size]
 * encode an array of values to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -298,7 +315,8 @@ let trytes = tryteConverter.arrayToTrytes(array, 'string');
 
 ---
 
-### trytesToArray(str?: string, type: DataTypes): array<any>
+### trytesToArray
+`trytesToArray(str?: string, type: DataTypes): array<any>`
 * decode trytes to an array of values
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
