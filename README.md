@@ -13,13 +13,13 @@ Data comes in many shapes and sizes. Storing all data types as strings would be 
 
 ## Supported Encodings
 - [x] String
-- [x] 8-bit Integer
-- [x] 16-bit Integer
-- [x] 32-bit Integer
+- [x] 8-bit Integer [-128 to 127]
+- [x] 16-bit Integer [-32,768 to 32,767]
+- [x] 32-bit Integer [-2,147,483,648 to 2,147,483,647]
 - [ ] 64-bit Integer
-- [x] 8-bit Unsigned Integer
-- [x] 16-bit Unsigned Integer
-- [x] 32-bit Unsigned Integer
+- [x] 8-bit Unsigned Integer [0 to 255]
+- [x] 16-bit Unsigned Integer [0 to 65,535]
+- [x] 32-bit Unsigned Integer [0 to 4,294,967,295]
 - [ ] 64-bit Unsigned Integer
 - [x] Boolean
 - [x] DateUTC
@@ -55,7 +55,7 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 
 ## API
 
-### stringToTrytes(str?: string): string
+### stringToTrytes(str?: string): string [2 trytes per character]
 * encode string to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -76,7 +76,7 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 // decodedTrytes === 'This is a test.'
 ```
 
-### dateToTrytes(date?: Date): string
+### dateToTrytes(date?: Date): string [7 trytes]
 * encode a date to a string
 * NOTICE: This uses UTC encoding, so any date below January 1st, 1970 will resolve to the aforementioned date.
 * encoded dates are accurate to seconds (not milliseconds)
@@ -102,7 +102,7 @@ let decodedTrytes = tryteConverter.trytesToDate(trytes);
 // decodedTrytes === '2019-03-18T04:39:00.000Z'
 ```
 
-### int8ToTrytes(num?: number): string
+### int8ToTrytes(num?: number): string  [2 trytes]
 * encode 8-bit sized numbers to trytes
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
@@ -113,7 +113,7 @@ let trytes = tryteConverter.int8ToTrytes(127);
 ```
 
 ### trytesToInt8(str?: string): number
-* encode 8-bit sized numbers to trytes
+* decode trytes to 8-bit sized numbers
 ```js
 const tryteConverter = require('@iftt/tryte-encode-decode');
 
@@ -123,40 +123,136 @@ let decodedTrytes = tryteConverter.trytesToInt8(trytes);
 // decodedTrytes === 127
 ```
 
-### uInt8ToTrytes(num?: number): string
+### uInt8ToTrytes(num?: number): string [2 trytes]
+* encode 8-bit unsigned sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
 
-### int16ToTrytes(num?: number): string
+let trytes = tryteConverter.uInt8ToTrytes(255);
+
+// trytes === 'IL'
+```
+
+### int16ToTrytes(num?: number): string [4 trytes]
+* encode 16-bit sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.int16ToTrytes(32767);
+
+// trytes === 'CHXF'
+```
 
 ### trytesToInt16(str?: string): number
+* decode trytes to 16-bit sized numbers
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
 
-### uInt16ToTrytes(num?: number): string
+let trytes = tryteConverter.int16ToTrytes(32767);
+let decodedTrytes = tryteConverter.trytesToInt16(trytes);
 
-### int32ToTrytes(num?: number): string
+// decodedTrytes === 32767
+```
+
+### uInt16ToTrytes(num?: number): string [4 trytes]
+* encode 16-bit unsigned sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.uInt16ToTrytes(65535);
+
+// trytes === 'CHXF'
+```
+
+### int32ToTrytes(num?: number): string [7 trytes]
+* encode 32-bit sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.int32ToTrytes(2147483647);
+
+// trytes === 'KBHSYMU'
+```
 
 ### trytesToInt32(str?: string): number
+* decode trytes to 32-bit sized numbers
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
 
-### uInt32ToTrytes(num?: number): string
+let trytes = tryteConverter.int32ToTrytes(2147483647);
+let decodedTrytes = tryteConverter.trytesToInt32(trytes);
+
+// decodedTrytes === 2147483647
+```
+
+### uInt32ToTrytes(num?: number): string [7 trytes]
+* encode 32-bit unsigned sized numbers to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.uInt32ToTrytes(4294967295);
+
+// trytes === 'KBHSYMU'
+```
 
 ### trytesToUInt(str?: string): number
+* decode trytes to any sized unsigned number
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
 
-### booleanToTryte(bool?: boolean): string
+let trytes = tryteConverter.uInt32ToTrytes(4294967295);
+let decodedTrytes = tryteConverter.trytesToUInt(trytes);
+
+// decodedTrytes === 4294967295
+```
+
+### booleanToTryte(bool?: boolean): string [1 trytes]
+* encode a boolean value to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.booleanToTryte(false);
+
+// trytes === '9'
+```
 
 ### tryteToBoolean(str?: string): boolean
+* decode a tryte to a boolean value
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let trytes = tryteConverter.booleanToTryte(false);
+let decodedTrytes = tryteConverter.tryteToBoolean(trytes);
+
+// decodedTrytes === false
+```
 
 ### type DataTypes (enumerable string)
-  * 'string'
-  * 'int8'
-  * 'uint8'
-  * 'int16'
-  * 'uint16'
-  * 'int32'
-  * 'uint32'
-  * 'bool'
-  * 'date'
+  * 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date'
 
-### arrayToTrytes(arr?: array<any>, type: DataTypes): string
+### arrayToTrytes(arr?: array<any>, type: DataTypes): string [2 trytes arraySize + arraySize * type encoding size]
+* encode an array of values to trytes
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let array = ['a', 'b', 'c', 'd', 'e'];
+let trytes = tryteConverter.arrayToTrytes(array, 'string');
+
+// trytes === '9E999BPC999BQC999BRC999BSC999BTC'
+```
 
 ### trytesToArray(str?: string, type: DataTypes): array<any>
+* decode trytes to an array of values
+```js
+const tryteConverter = require('@iftt/tryte-encode-decode');
+
+let array = ['a', 'b', 'c', 'd', 'e'];
+let trytes = tryteConverter.arrayToTrytes(array, 'string');
+let decodedTrytes = tryteConverter.trytesToArray(trytes, 'string');
+
+// decodedTrytes === ['a', 'b', 'c', 'd', 'e']
+```
+
 
 ---
 
