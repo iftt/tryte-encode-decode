@@ -55,6 +55,26 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 
 ## API
 
+- [stringToTrytes(str?: string): string [2 trytes per character]](#stringToTrytes)
+- [trytesToString(str?: string): string](#trytesToString)
+- [dateToTrytes(date?: Date): string [7 trytes]](#dateToTrytes)
+- [trytesToDate](#trytesToDate)
+- [int8ToTrytes](#int8ToTrytes)
+- [trytesToInt8](#trytesToInt8)
+- [uInt8ToTrytes](#uInt8ToTrytes)
+- [int16ToTrytes](#int16ToTrytes)
+- [trytesToInt16](#trytesToInt16)
+- [uInt16ToTrytes](#uInt16ToTrytes)
+- [int32ToTrytes](#int32ToTrytes)
+- [trytesToInt32](#trytesToInt32)
+- [uInt32ToTrytes](#uInt32ToTrytes)
+- [trytesToUInt](#trytesToUInt)
+- [booleanToTryte](#booleanToTryte)
+- [tryteToBoolean](#tryteToBoolean)
+- [type DataTypes](#type DataTypes)
+- [arrayToTrytes](#arrayToTrytes)
+- [trytesToArray](#trytesToArray)
+
 ### stringToTrytes(str?: string): string [2 trytes per character]
 * encode string to trytes
 ```js
@@ -64,6 +84,8 @@ let trytes = tryteConverter.stringToTrytes('This is a test.');
 
 // trytes === 'CCWCXCGDEAXCGDEAPCEAHDTCGDHDSA'
 ```
+
+---
 
 ### trytesToString(str?: string): string
 * decode trytes back to a string
@@ -75,6 +97,8 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 
 // decodedTrytes === 'This is a test.'
 ```
+
+---
 
 ### dateToTrytes(date?: Date): string [7 trytes]
 * encode a date to a string
@@ -89,6 +113,8 @@ let trytes = tryteConverter.dateToTrytes(date);
 // trytes === 'D9F9RH9'
 ```
 
+---
+
 ### trytesToDate(str?: string): Date
 * decode trytes back to a date
 * NOTICE: This uses UTC encoding, so any date below January 1st, 1970 will resolve to the aforementioned date.
@@ -102,6 +128,8 @@ let decodedTrytes = tryteConverter.trytesToDate(trytes);
 // decodedTrytes === '2019-03-18T04:39:00.000Z'
 ```
 
+---
+
 ### int8ToTrytes(num?: number): string  [2 trytes]
 * encode 8-bit sized numbers to trytes
 ```js
@@ -111,6 +139,8 @@ let trytes = tryteConverter.int8ToTrytes(127);
 
 // trytes === 'IL'
 ```
+
+---
 
 ### trytesToInt8(str?: string): number
 * decode trytes to 8-bit sized numbers
@@ -123,6 +153,8 @@ let decodedTrytes = tryteConverter.trytesToInt8(trytes);
 // decodedTrytes === 127
 ```
 
+---
+
 ### uInt8ToTrytes(num?: number): string [2 trytes]
 * encode 8-bit unsigned sized numbers to trytes
 ```js
@@ -133,6 +165,8 @@ let trytes = tryteConverter.uInt8ToTrytes(255);
 // trytes === 'IL'
 ```
 
+---
+
 ### int16ToTrytes(num?: number): string [4 trytes]
 * encode 16-bit sized numbers to trytes
 ```js
@@ -142,6 +176,8 @@ let trytes = tryteConverter.int16ToTrytes(32767);
 
 // trytes === 'CHXF'
 ```
+
+---
 
 ### trytesToInt16(str?: string): number
 * decode trytes to 16-bit sized numbers
@@ -154,6 +190,8 @@ let decodedTrytes = tryteConverter.trytesToInt16(trytes);
 // decodedTrytes === 32767
 ```
 
+---
+
 ### uInt16ToTrytes(num?: number): string [4 trytes]
 * encode 16-bit unsigned sized numbers to trytes
 ```js
@@ -164,6 +202,8 @@ let trytes = tryteConverter.uInt16ToTrytes(65535);
 // trytes === 'CHXF'
 ```
 
+---
+
 ### int32ToTrytes(num?: number): string [7 trytes]
 * encode 32-bit sized numbers to trytes
 ```js
@@ -173,6 +213,8 @@ let trytes = tryteConverter.int32ToTrytes(2147483647);
 
 // trytes === 'KBHSYMU'
 ```
+
+---
 
 ### trytesToInt32(str?: string): number
 * decode trytes to 32-bit sized numbers
@@ -185,6 +227,8 @@ let decodedTrytes = tryteConverter.trytesToInt32(trytes);
 // decodedTrytes === 2147483647
 ```
 
+---
+
 ### uInt32ToTrytes(num?: number): string [7 trytes]
 * encode 32-bit unsigned sized numbers to trytes
 ```js
@@ -194,6 +238,8 @@ let trytes = tryteConverter.uInt32ToTrytes(4294967295);
 
 // trytes === 'KBHSYMU'
 ```
+
+---
 
 ### trytesToUInt(str?: string): number
 * decode trytes to any sized unsigned number
@@ -206,6 +252,8 @@ let decodedTrytes = tryteConverter.trytesToUInt(trytes);
 // decodedTrytes === 4294967295
 ```
 
+---
+
 ### booleanToTryte(bool?: boolean): string [1 trytes]
 * encode a boolean value to trytes
 ```js
@@ -215,6 +263,8 @@ let trytes = tryteConverter.booleanToTryte(false);
 
 // trytes === '9'
 ```
+
+---
 
 ### tryteToBoolean(str?: string): boolean
 * decode a tryte to a boolean value
@@ -227,8 +277,12 @@ let decodedTrytes = tryteConverter.tryteToBoolean(trytes);
 // decodedTrytes === false
 ```
 
+---
+
 ### type DataTypes (enumerable string)
   * 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date'
+
+---
 
 ### arrayToTrytes(arr?: array<any>, type: DataTypes): string [2 trytes arraySize + arraySize * type encoding size]
 * encode an array of values to trytes
@@ -240,6 +294,8 @@ let trytes = tryteConverter.arrayToTrytes(array, 'string');
 
 // trytes === '9E999BPC999BQC999BRC999BSC999BTC'
 ```
+
+---
 
 ### trytesToArray(str?: string, type: DataTypes): array<any>
 * decode trytes to an array of values
