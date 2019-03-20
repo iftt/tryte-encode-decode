@@ -1,7 +1,7 @@
 // @flow
 // Number type ranges: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=vs-2017
-const TRYTE_ALPHABET   = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const TRYTE_TO_DEFAULT = { '9': '0', 'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5', 'F': '6', 'G': '7', 'H': '8', 'I': '9', 'J': 'a', 'K': 'b', 'L': 'c', 'M': 'd', 'N': 'e', 'O': 'f', 'P': 'g', 'Q': 'h', 'R': 'i', 'S': 'j', 'T': 'k', 'U': 'l', 'V': 'm', 'W': 'n', 'X': 'o', 'Y': 'p', 'Z': 'q' };
+export const TRYTE_ALPHABET   = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+export const TRYTE_TO_DEFAULT = { '9': '0', 'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5', 'F': '6', 'G': '7', 'H': '8', 'I': '9', 'J': 'a', 'K': 'b', 'L': 'c', 'M': 'd', 'N': 'e', 'O': 'f', 'P': 'g', 'Q': 'h', 'R': 'i', 'S': 'j', 'T': 'k', 'U': 'l', 'V': 'm', 'W': 'n', 'X': 'o', 'Y': 'p', 'Z': 'q' };
 export const typesizes = { int8: 2, uint8: 2, int16: 4, uint16: 4, int32: 7, uint32: 7, bool: 1, date: 7 };
 
 export type DataTypes = 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date';
