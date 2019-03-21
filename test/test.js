@@ -428,3 +428,15 @@ test('test encoding and decoding an array of strings', function (t) {
   t.equal(trytes.length, 116);
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes));
 });
+
+test('test encoding and decoding an array with tryte overflow', function (t) {
+  t.plan(1);
+
+  // Standard boolean array
+  // let array = [false, true, false, false, true];
+  // let trytes = tryteConverter.arrayToTrytes(array, 'bool');
+  let trytes = '9E9A99A999999';
+  let decodedTrytes = tryteConverter.trytesToArray(trytes, 'bool');
+
+  t.equal(JSON.stringify([false, true, false, false, true]), JSON.stringify(decodedTrytes));
+});

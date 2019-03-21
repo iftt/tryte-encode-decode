@@ -277,7 +277,7 @@ export function trytesToArray(trytes: string, type: DataTypes): Array<any> {
       startingIndex += stringSize;
     }
   } else {
-    let tryteSize = typesizes[type] * arraySize;
+    let tryteSize = typesizes[type] * arraySize + 2;
     for (let i = 2; i < tryteSize; i += stepSize)
       array.push(decode(trytes.slice(i, i + stepSize)));
   }
