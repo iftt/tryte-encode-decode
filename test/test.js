@@ -435,8 +435,20 @@ test('test encoding and decoding an array with tryte overflow', function (t) {
   // Standard boolean array
   // let array = [false, true, false, false, true];
   // let trytes = tryteConverter.arrayToTrytes(array, 'bool');
-  let trytes = '9E9A99A999999';
+  let trytes = '9E9A99A9AAAAA';
   let decodedTrytes = tryteConverter.trytesToArray(trytes, 'bool');
 
   t.equal(JSON.stringify([false, true, false, false, true]), JSON.stringify(decodedTrytes));
+});
+
+test('test encoding and decoding an array of strings with tryte overflow', function (t) {
+  t.plan(1);
+
+  // Standard string array
+  // let array = ['a', 'b', 'c', 'd', 'e'];
+  // let trytes = tryteConverter.arrayToTrytes(array, 'string');
+  let trytes = '9E999BPC999BQC999BRC999BSC999BTC9A9A9A9A9A9A9A';
+  let decodedTrytes = tryteConverter.trytesToArray(trytes, 'string');
+
+  t.equal(JSON.stringify(['a', 'b', 'c', 'd', 'e']), JSON.stringify(decodedTrytes));
 });
