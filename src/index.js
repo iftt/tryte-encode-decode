@@ -203,7 +203,7 @@ export function geoToTrytes(geo: {lat: number, lon: number}): string {
   return iotaAreaCodes.encode(geo.lat, geo.lon, 11);
 }
 
-export function trytesToGeo(trytes: string): [number] {
+export function trytesToGeo(trytes: string): {lat: number, lon: number} {
   let codeArea = iotaAreaCodes.decode(trytes);
   return { lat: codeArea.latitude, lon: codeArea.longitude };
 }

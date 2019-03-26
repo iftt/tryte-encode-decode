@@ -268,7 +268,7 @@ test('test encoding and decoding a boolean value', function (t) {
   t.equal(decodedTrytes, false);
 });
 
-test('test encoding and decoding geographic coordinates', function (t) {
+test('test encoding and decoding geospatial coordinates', function (t) {
   t.plan(12);
 
   // standard value
