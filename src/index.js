@@ -1,10 +1,11 @@
 // @flow
+const iotaAreaCodes = require('@iota/area-codes');
 // Number type ranges: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=vs-2017
 export const TRYTE_ALPHABET   = '9ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 export const TRYTE_TO_DEFAULT = { '9': '0', 'A': '1', 'B': '2', 'C': '3', 'D': '4', 'E': '5', 'F': '6', 'G': '7', 'H': '8', 'I': '9', 'J': 'a', 'K': 'b', 'L': 'c', 'M': 'd', 'N': 'e', 'O': 'f', 'P': 'g', 'Q': 'h', 'R': 'i', 'S': 'j', 'T': 'k', 'U': 'l', 'V': 'm', 'W': 'n', 'X': 'o', 'Y': 'p', 'Z': 'q' };
-export const typesizes = { int8: 2, uint8: 2, int16: 4, uint16: 4, int32: 7, uint32: 7, bool: 1, date: 7 };
+export const typesizes = { int8: 2, uint8: 2, int16: 4, uint16: 4, int32: 7, uint32: 7, bool: 1, date: 7, geo: 12 };
 
-export type DataTypes = 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date';
+export type DataTypes = 'string' | 'int8' | 'uint8' | 'int16' | 'uint16' | 'int32' | 'uint32' | 'bool' | 'date' | 'geo';
 
 export function stringToTrytes(input: string): string {
   if (typeof input !== 'string') // soft failure
@@ -191,6 +192,22 @@ export function tryteToBoolean(tryte: string): bool {
     return false;
 }
 
+export function geoToTrytes(geo: {lat: number, lon: number}): string {
+  if (!geo || typeof geo !== 'object')
+    geo = { lat: 0, lon: 0 };
+  if (typeof geo.lat !== 'number')
+    geo.lat = 0;
+  if (typeof geo.lon !== 'number')
+    geo.lon = 0;
+
+  return iotaAreaCodes.encode(geo.lat, geo.lon, 11);
+}
+
+export function trytesToGeo(trytes: string): [number] {
+  let codeArea = iotaAreaCodes.decode(trytes);
+  return { lat: codeArea.latitude, lon: codeArea.longitude };
+}
+
 function _getEncoder(type: DataTypes): function {
   if (type === 'string') {
     return (input: string): string => {
@@ -213,6 +230,8 @@ function _getEncoder(type: DataTypes): function {
     return booleanToTryte;
   } else if (type === 'date') {
     return dateToTrytes;
+  } else if (type === 'geo') {
+    return geoToTrytes;
   } else {
     return null;
   }
@@ -242,6 +261,8 @@ function _getDecoder(type: DataTypes): [function, function] | [number, function]
     return [1, tryteToBoolean];
   } else if (type === 'date') {
     return [7, trytesToDate];
+  } else if (type === 'geo') {
+    return [12, trytesToGeo];
   } else {
     return [null, null];
   }
@@ -302,6 +323,8 @@ export default {
   trytesToUInt,
   booleanToTryte,
   tryteToBoolean,
+  geoToTrytes,
+  trytesToGeo,
   arrayToTrytes,
   trytesToArray
 };

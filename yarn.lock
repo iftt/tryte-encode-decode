@@ -632,6 +632,13 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@iota/area-codes@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@iota/area-codes/-/area-codes-0.1.0.tgz#587c9737a742d78306e65c2af555823c2db8b8db"
+  integrity sha512-riWkf9/3w7N+VF+nVXWVCS2HouhizCYtrFbDp75fxwK/sHEKro0jUUAyGno24R7Co2IruGokeyJToKiQRpos4w==
+  dependencies:
+    open-location-code-typescript "^1.4.0"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -2199,6 +2206,11 @@ onetime@^2.0.0:
   integrity sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   dependencies:
     mimic-fn "^1.0.0"
+
+open-location-code-typescript@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/open-location-code-typescript/-/open-location-code-typescript-1.4.0.tgz#509f51e7e02799b954ffb00be6f425167f5b0c66"
+  integrity sha512-k5qeLR3NiEXHCy8BjqazbfvOJbIlnTiBN+JkHAJHROuSVTD4c1I+wFRw3aZet1FxksoWuo7z6MXb6Ei21NLY8g==
 
 optionator@^0.8.2:
   version "0.8.2"

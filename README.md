@@ -23,6 +23,7 @@ Data comes in many shapes and sizes. Storing all data types as strings would be 
 - [ ] 64-bit Unsigned Integer
 - [x] Boolean
 - [x] DateUTC
+- [x] Geospatial Coordinates
 - [x] Array<supported>
 
 ## Further Reading
@@ -71,6 +72,8 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 - [trytesToUInt](#trytesToUInt)
 - [booleanToTryte](#booleanToTryte)
 - [tryteToBoolean](#tryteToBoolean)
+- [geoToTrytes](#geoToTrytes)
+- [trytesToGeo](#trytesToGeo)
 - [type DataTypes](#type-DataTypes)
 - [arrayToTrytes](#arrayToTrytes)
 - [trytesToArray](#trytesToArray)
@@ -291,6 +294,29 @@ let trytes = tryteConverter.booleanToTryte(false);
 let decodedTrytes = tryteConverter.tryteToBoolean(trytes);
 
 // decodedTrytes === false
+```
+
+---
+
+### geoToTrytes
+`geoToTrytes(geo: { lat: number, lon: number }): string`
+* encode geospatial coordinates to trytes
+```js
+let trytes = tryteConverter.geoToTrytes({ lat: 52.529562, lon: 13.413047 });
+
+// trytes === 'NPHTQORL9XKP'
+```
+
+---
+
+### trytesToGeo
+`trytesToGeo(trytes: string): { lat: number, lon: number }`
+* decode trytes to geospatial coordinates
+```js
+let trytes = tryteConverter.geoToTrytes({ lat: 52.529562, lon: 13.413047 });
+let decodedTrytes = tryteConverter.trytesToGeo(trytes);
+
+// decodedTrytes === { lat: 52.52956250000001, lon : 13.413046874999981 }
 ```
 
 ---

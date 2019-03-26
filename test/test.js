@@ -268,6 +268,42 @@ test('test encoding and decoding a boolean value', function (t) {
   t.equal(decodedTrytes, false);
 });
 
+test('test encoding and decoding geographic coordinates', function (t) {
+  t.plan(12);
+
+  // standard value
+  let trytes = tryteConverter.geoToTrytes({ lat: 52.529562, lon: 13.413047 });
+  let decodedTrytes = tryteConverter.trytesToGeo(trytes);
+
+  t.equal(trytes, 'NPHTQORL9XKP');
+  t.equal(trytes.length, 12);
+  t.equal(JSON.stringify(decodedTrytes), JSON.stringify({ lat: 52.52956250000001, lon : 13.413046874999981 }));
+
+  // another standard value
+  trytes = tryteConverter.geoToTrytes({ lat: 40.7142700, lon: -74.0059700 }); // new york, new york
+  decodedTrytes = tryteConverter.trytesToGeo(trytes);
+
+  t.equal(trytes, 'MLQLUZLW9USF');
+  t.equal(trytes.length, 12);
+  t.equal(JSON.stringify(decodedTrytes), JSON.stringify({ lat: 40.71426249999996, lon: -74.005984375 }));
+
+  // null value
+  trytes = tryteConverter.geoToTrytes(null);
+  decodedTrytes = tryteConverter.trytesToGeo(trytes);
+
+  t.equal(trytes, 'KPQFFFFF9FFF');
+  t.equal(trytes.length, 12);
+  t.equal(JSON.stringify(decodedTrytes), JSON.stringify({ lat: 0.0000125, lon : 0.000015625 }));
+
+  // bad values
+  trytes = tryteConverter.geoToTrytes({ lat: 'test', lon: false });
+  decodedTrytes = tryteConverter.trytesToGeo(trytes);
+
+  t.equal(trytes, 'KPQFFFFF9FFF');
+  t.equal(trytes.length, 12);
+  t.equal(JSON.stringify(decodedTrytes), JSON.stringify({ lat: 0.0000125, lon : 0.000015625 }));
+});
+
 test('test encoding and decoding an array of 8 bit integers', function (t) {
   t.plan(9);
 
@@ -386,7 +422,7 @@ test('test encoding and decoding an array of boolean values', function (t) {
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes));
 });
 
-test('test encoding and decoding an array of boolean values', function (t) {
+test('test encoding and decoding an array of dates', function (t) {
   t.plan(3);
 
   // Standard date array
@@ -395,7 +431,7 @@ test('test encoding and decoding an array of boolean values', function (t) {
   let trytes = tryteConverter.arrayToTrytes(array, 'date');
   let decodedTrytes = tryteConverter.trytesToArray(trytes, 'date');
 
-  t.equal(trytes, '9E9999999D9F9RH9D9F9REU999999ECZSLHMC');
+  t.equal(trytes, '9E9999999D9F9RH9D9F9REU999999ECZSKYPL');
   t.equal(trytes.length, 37);
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes));
 });
@@ -427,6 +463,19 @@ test('test encoding and decoding an array of strings', function (t) {
   t.equal(trytes, '9B99AUCCWCXCGDEAXCGDEAPCEAQCXCVCVCTCFDEAGDHDFDXCBDVCFA99BDCCWCXCGDEAXCGDEAPCBDCDHDWCTCFDEAQCXCVCEAGDHDFDXCBDVCSASASA');
   t.equal(trytes.length, 116);
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes));
+});
+
+test('test encoding and decoding an array of boolean values', function (t) {
+  t.plan(3);
+
+  // Standard boolean array
+  let array = [{ lat: 52.529562, lon: 13.413047 }, { lat: 40.7142700, lon: -74.0059700 }, { lat: 0, lon: 0 }];
+  let trytes = tryteConverter.arrayToTrytes(array, 'geo');
+  let decodedTrytes = tryteConverter.trytesToArray(trytes, 'geo');
+
+  t.equal(trytes, '9CNPHTQORL9XKPMLQLUZLW9USFKPQFFFFF9FFF');
+  t.equal(trytes.length, 38);
+  t.equal(JSON.stringify([{lat: 52.52956250000001, lon :13.413046874999981}, {lat: 40.71426249999996, lon :-74.005984375}, {lat: 0.0000125, lon :0.000015625}]), JSON.stringify(decodedTrytes));
 });
 
 test('test encoding and decoding an array with tryte overflow', function (t) {
