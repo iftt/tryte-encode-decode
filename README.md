@@ -52,6 +52,12 @@ let decodedTrytes = tryteConverter.trytesToString(trytes);
 // decodedTrytes === 'This is a test.'
 ```
 
+## Debug
+If you need to debug use the string `tryte-encode-decode`
+```sh
+DEBUG=tryte-encode-decode node x
+```
+
 ---
 
 ## API
