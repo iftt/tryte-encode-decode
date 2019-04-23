@@ -427,11 +427,11 @@ test('test encoding and decoding an array of dates', function (t) {
 
   // Standard date array
   // NOTE: new Date() will never return the exact same because the DTC value is rounded up from milliseconds to seconds, thus there will be a slight discrepency
-  let array = [new Date(0), new Date('2019-03-18T04:39:00.000Z'), new Date('2019-03-18T04:38:00.000Z'), new Date(1991, 6, 2, 10, 33, 30, 0), new Date(2018, 11, 24, 10, 33, 30, 0)]
+  let array = [new Date(0), new Date('2019-03-18T04:39:00.000Z'), new Date('2019-03-18T04:38:00.000Z'), new Date(5000), new Date(5000000)]
   let trytes = tryteConverter.arrayToTrytes(array, 'date')
   let decodedTrytes = tryteConverter.trytesToArray(trytes, 'date')
 
-  t.equal(trytes, '9E9999999D9F9RH9D9F9REUATGQPHCCZSKYPL')
+  t.equal(trytes, '9E9999999D9F9RH9D9F9REU999999E9999FWE')
   t.equal(trytes.length, 37)
   t.equal(JSON.stringify(array), JSON.stringify(decodedTrytes))
 })
