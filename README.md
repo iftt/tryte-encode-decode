@@ -1,11 +1,11 @@
-# tryte-encode-decode [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![Greenkeeper badge](https://badges.greenkeeper.io/IFTT/tryte-encode-decode.svg)](https://greenkeeper.io/)
+# tryte-encode-decode [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![downloads][downloads-image]][downloads-url] [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-[travis-image]: https://travis-ci.org/IFTT/tryte-encode-decode.svg?branch=master
-[travis-url]: https://travis-ci.org/IFTT/tryte-encode-decode
+[travis-image]: https://travis-ci.org/iftt/tryte-encode-decode.svg?branch=master
+[travis-url]: https://travis-ci.org/iftt/tryte-encode-decode
 [npm-image]: https://img.shields.io/npm/v/@iftt/tryte-encode-decode.svg
 [npm-url]: https://npmjs.org/package/@iftt/tryte-encode-decode
 [downloads-image]: https://img.shields.io/npm/dm/@iftt/tryte-encode-decode.svg
-[downloads-url]: https://npmjs.org/package/@iftt/tryte-encode-decode
+[downloads-url]: https://www.npmjs.com/package/@iftt/tryte-encode-decode
 
 ## About
 
